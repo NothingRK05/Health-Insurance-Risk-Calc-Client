@@ -4,36 +4,80 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Health Client</title>
-  
 </head>
 <body>
-  
-<label>Feet:</label>
-<input type="number" id="feet"><br>
 
-<label>Inches:</label>
-<input type="number" id="inches"><br>
+  <h2>BMI Calculator</h2>
 
-<label>Weight (lbs):</label>
-<input type="number" id="lbs"><br>
+  <label>Feet:</label>
+  <input type="number" id="feet"><br>
 
-<button onclick="calculateBMI()">Calculate BMI</button>
+  <label>Inches:</label>
+  <input type="number" id="inches"><br>
 
-<div id="bmi-result"></div>
-<br><br>
+  <label>Weight (lbs):</label>
+  <input type="number" id="lbs"><br>
+
+  <button onclick="calculateBMI()">Calculate BMI</button>
+
+  <div id="bmi-result"></div>
+
+  <br><br>
+
+  <h2>Risk Calculator</h2>
+
+  <label>Age:</label>
+  <input type="number" id="age"><br>
+
+  <label>BMI:</label>
+  <input type="number" id="risk-bmi"><br>
+
+  <label>Systolic:</label>
+  <input type="number" id="systolic"><br>
+
+  <label>Diastolic:</label>
+  <input type="number" id="diastolic"><br>
+
+  <label>Family Disease:</label>
+  <select id="disease">
+    <option value="">None</option>
+    <option value="diabetes">Diabetes</option>
+    <option value="cancer">Cancer</option>
+    <option value="alzheimers">Alzheimer's</option>
+  </select><br>
+
+  <button onclick="calculateRisk()">Calculate Risk</button>
+
+  <div id="risk-result"></div>
 
 </body>
+
 <script>
   function calculateBMI() {
-      const feet = document.getElementById('feet').value;
-      const inches = document.getElementById('inches').value;
-      const lbs = document.getElementById('lbs').value;
+    const feet = document.getElementById('feet').value;
+    const inches = document.getElementById('inches').value;
+    const lbs = document.getElementById('lbs').value;
 
-      fetch(`https://health-insurance-risk-calc-s.azurewebsites.net/calculate-bmi?feet=${feet}&inches=${inches}&lbs=${lbs}`)
-        .then(response => response.text())
-        .then(data => {
-          document.getElementById('bmi-result').innerText = "BMI: " + data;
-        });
-    }
+    fetch(`https://health-insurance-risk-calc-s.azurewebsites.net/calculate-bmi?feet=${feet}&inches=${inches}&lbs=${lbs}`)
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('bmi-result').innerText = "BMI: " + data;
+      });
+  }
+
+  function calculateRisk() {
+    const age = document.getElementById('age').value;
+    const bmi = document.getElementById('risk-bmi').value;
+    const systolic = document.getElementById('systolic').value;
+    const diastolic = document.getElementById('diastolic').value;
+    const disease = document.getElementById('disease').value;
+
+    fetch(`https://health-insurance-risk-calc-s.azurewebsites.net/calculate-risk?age=${age}&bmi=${bmi}&systolic=${systolic}&diastolic=${diastolic}&disease=${disease}`)
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById('risk-result').innerText =
+          "Risk Score: " + data.totalRisk + " | Risk Level: " + data.riskLevel;
+      });
+  }
 </script>
 </html>
