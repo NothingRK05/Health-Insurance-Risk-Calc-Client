@@ -1,0 +1,92 @@
+/* Page layout */
+body {
+  font-family: Arial, sans-serif;
+  background: #f5f7fa;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+}
+
+.container {
+  background: white;
+  padding: 30px;
+  margin-top: 40px;
+  width: 350px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+label {
+  display: block;
+  margin-top: 12px;
+  font-weight: bold;
+  color: #444;
+}
+
+input, select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 6px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  background: #fafafa;
+}
+
+button {
+  width: 100%;
+  margin-top: 20px;
+  padding: 12px;
+  background: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+button:hover {
+  background: #357ac9;
+}
+
+#risk-result {
+  margin-top: 20px;
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.risk-green {
+  background: #e8f9e8;
+  border-left: 4px solid #3cb043;
+  color: #2d7a32;
+}
+
+.risk-yellow {
+  background: #fffbe6;
+  border-left: 4px solid #f4d03f;
+  color: #a68b00;
+}
+
+.risk-orange {
+  background: #fff4e5;
+  border-left: 4px solid #ff9800;
+  color: #c76a00;
+}
+
+.risk-red {
+  background: #ffe5e5;
+  border-left: 4px solid #e53935;
+  color: #b71c1c;
+}
