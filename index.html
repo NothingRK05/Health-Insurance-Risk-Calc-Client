@@ -41,12 +41,11 @@
     </select>
 
     <label>Family Disease:</label>
-    <select id="disease">
-      <option value="">None</option>
-      <option value="diabetes">Diabetes</option>
-      <option value="cancer">Cancer</option>
-      <option value="alzheimers">Alzheimer's</option>
-    </select>
+    <div class="checkbox-group">
+      <label><input type="checkbox" name="disease[]" value="diabetes"> Diabetes</label>
+      <label><input type="checkbox" name="disease[]" value="cancer"> Cancer</label>
+      <label><input type="checkbox" name="disease[]" value="alzheimers"> Alzheimer's</label>
+    </div>
 
     <button onclick="calculateRisk()">Calculate Risk</button>
 
@@ -64,13 +63,16 @@
     const inches= document.getElementById('inches').value;
     const systolic = document.getElementById('systolic').value;
     const diastolic = document.getElementById('diastolic').value;
-    const disease = document.getElementById('disease').value;
+    const selectedDiseases = Array.from(
+    document.querySelectorAll('input[name="disease[]"]:checked')
+    ).map(cb => cb.value);
+    const diseaseScore = selectedDiseases.length;
 
     const resultBox = document.getElementById('risk-result');
 
     fetch("https://health-insurance-risk-calc-s.azurewebsites.net/ping")
     .then(() => {
-      return fetch(`https://health-insurance-risk-calc-s.azurewebsites.net/calculate-risk?age=${age}&weight=${weight}&feet=${feet}&inches=${inches}&systolic=${systolic}&diastolic=${diastolic}&disease=${disease}`);
+      return fetch(`https://health-insurance-risk-calc-s.azurewebsites.net/calculate-risk?age=${age}&weight=${weight}&feet=${feet}&inches=${inches}&systolic=${systolic}&diastolic=${diastolic}&disease=${diseaseScore}`);
     })
     .then(response => response.json())
     .then(data => {
