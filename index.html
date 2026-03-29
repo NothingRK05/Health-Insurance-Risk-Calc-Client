@@ -55,6 +55,9 @@
 
 <script>
   function calculateRisk() {
+
+    
+
     const age = document.getElementById('age').value;
     const weight = document.getElementById('weight').value;
     const feet = document.getElementById('feet').value;
@@ -65,27 +68,30 @@
 
     const resultBox = document.getElementById('risk-result');
 
-    fetch(`https://health-insurance-risk-calc-s.azurewebsites.net/calculate-risk?age=${age}&weight=${weight}&feet=${feet}&inches=${inches}&systolic=${systolic}&diastolic=${diastolic}&disease=${disease}`)
-      .then(response => response.json())
-      .then(data => {
-        document.getElementById('risk-result').innerText =
-          "Risk Score: " + data.totalRisk + " | Risk Level: " + data.riskLevel;
+    fetch("https://health-insurance-risk-calc-s.azurewebsites.net/ping")
+    .then(() => {
+      return fetch(`https://health-insurance-risk-calc-s.azurewebsites.net/calculate-risk?age=${age}&weight=${weight}&feet=${feet}&inches=${inches}&systolic=${systolic}&diastolic=${diastolic}&disease=${disease}`);
+    })
+    .then(response => response.json())
+    .then(data => {
+      resultBox.innerText =
+        "Risk Score: " + data.totalRisk + " | Risk Level: " + data.riskLevel;
 
-          resultBox.className = "";
+      resultBox.className = "";
 
-          risk = parseInt(data.totalRisk);
+      const risk = parseInt(data.totalRisk);
 
-          if (risk <= 25) {
-            resultBox.classList.add("risk-green");
-          } else if (risk <= 50) {
-            resultBox.classList.add("risk-yellow");
-          } else if (risk <= 75) {
-            resultBox.classList.add("risk-orange");
-          } else {
-            resultBox.classList.add("risk-red");
-          }
-      });
-  }
+      if (risk <= 25) {
+        resultBox.classList.add("risk-green");
+      } else if (risk <= 50) {
+        resultBox.classList.add("risk-yellow");
+      } else if (risk <= 75) {
+        resultBox.classList.add("risk-orange");
+      } else {
+        resultBox.classList.add("risk-red");
+      }
+    });
+}
 </script>
 
 </body>
