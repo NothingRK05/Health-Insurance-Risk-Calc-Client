@@ -57,33 +57,6 @@ This client calls the following endpoints on the Node.js API server:
 
 ---
 
-## Getting Started
-
-### Prerequisites
-
-- [Node.js](https://nodejs.org/) (for local development tooling)
-- [Git](https://git-scm.com/)
-- Access to the shared GitHub organization repository
-- A running instance of the Health Insurance Risk Calculator API server
-
-### Local Development
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/<your-org>/health-risk-calculator-client.git
-   cd health-risk-calculator-client
-   ```
-
-2. Configure the API base URL:
-   - Open `config.js` (or the relevant config file) and set `API_BASE_URL` to your local or deployed API server address.
-
-3. Open `index.html` in your browser, or use a local dev server:
-   ```bash
-   npx serve .
-   ```
-
----
-
 ## CI/CD
 
 Pushes to the `main` branch automatically trigger the Azure Static Web Apps deployment pipeline. All team members should verify their changes deploy correctly after merging.
@@ -103,4 +76,4 @@ Pushes to the `main` branch automatically trigger the Azure Static Web Apps depl
 
 ## Related Repository
 
-- [Health Insurance Risk Calculator — API Server](https://health-insurance-risk-calc-s.azurewebsites.net)
+- [Health Insurance Risk Calculator — API Server](https://github.com/NothingRK05/Health-Insurance-Risk-Calc-Server)
